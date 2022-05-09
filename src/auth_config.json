@@ -2,5 +2,6 @@
   "domain": "thematic-frontend-test.auth0.com",
   "clientId": "sb68GNrcFKB55DrgbGYniUvPt9vPg5OV",
   "audience": "https://frontend-test.getthematic.com",
-  "apiBase": ""
+  "apiBase": "https://q7hu82zjef.execute-api.us-east-1.amazonaws.com/staging"
 }
+

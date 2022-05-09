@@ -9,7 +9,7 @@ interface HomeProps {
 }
 
 interface HomeState {
-  currentUser: User;
+  currentUser?: User;
   error: string;
   loading: boolean;
 }
@@ -19,7 +19,7 @@ interface User {
   email: string;
 }
 
-class Home extends Component<HomeProps> {
+class Home extends Component<HomeProps, HomeState> {
   state = {
     currentUser: undefined,
     error: '',
