@@ -37,6 +37,7 @@ export type Filter = {
 };
 
 export type FilterState = {
+  isFetchingSynopsis: boolean;
   synopsis: null | Synopsis;
   error: null | SynopsisError;
   filters: Filter[];
@@ -45,7 +46,7 @@ export type FilterState = {
 export type FilterAction =
   | {
       type: "FILTER_ADDED";
-      payload: Filter;
+      payload: string;
     }
   | {
       type: "FILTER_UPDATED";
