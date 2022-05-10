@@ -1,3 +1,8 @@
+export interface User {
+  id: string;
+  email: string;
+}
+
 export type ColType = "Text" | "Date" | "Number";
 
 export type Synopsis = {

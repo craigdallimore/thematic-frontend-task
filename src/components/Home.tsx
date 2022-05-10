@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
 import Hero from "./Hero";
 import authConfig from "../auth_config.json";
-import { Auth0ContextInterface, withAuth0 } from '@auth0/auth0-react';
+import { Auth0ContextInterface, withAuth0 } from "@auth0/auth0-react";
 import { Alert } from "reactstrap";
+import { User } from "../types";
 
 interface HomeProps {
   auth0: Auth0ContextInterface;
@@ -14,36 +15,32 @@ interface HomeState {
   loading: boolean;
 }
 
-interface User {
-  id: string;
-  email: string;
-}
-
 class Home extends Component<HomeProps, HomeState> {
   state = {
     currentUser: undefined,
-    error: '',
-    loading: false
+    error: "",
+    loading: false,
   };
 
-  componentDidMount () {
+  componentDidMount() {
     const { isAuthenticated } = this.props.auth0;
     if (isAuthenticated) {
       this.getCurrentUserData();
     }
   }
 
-  async getCurrentUserData () {
-    this.setState({ loading: true, error: '' });
+  async getCurrentUserData() {
+    this.setState({ loading: true, error: "" });
 
     const url = `${authConfig.apiBase}/current-user`;
-    const getAccessTokenSilently = await this.props.auth0.getAccessTokenSilently();
+    const getAccessTokenSilently =
+      await this.props.auth0.getAccessTokenSilently();
 
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${getAccessTokenSilently}`
-      }
+        Authorization: `Bearer ${getAccessTokenSilently}`,
+      },
     });
 
     if (!response.ok) {
@@ -51,30 +48,22 @@ class Home extends Component<HomeProps, HomeState> {
       this.setState({ error });
       return;
     }
-  
+
     const { data } = await response.json();
 
     this.setState({ currentUser: data, loading: false });
   }
 
-  render () {
+  render() {
     const { currentUser, error, loading } = this.state;
     return (
       <Fragment>
         <Hero />
-        {loading &&
-          <p className="text-center">Loading...</p>
-        }
-        {error &&
-          <Alert color="danger">
-            {error}  
-          </Alert>
-        }
-        {currentUser &&
-          <div className="text-center">
-            {JSON.stringify(currentUser)}
-          </div>
-        }
+        {loading && <p className="text-center">Loading...</p>}
+        {error && <Alert color="danger">{error}</Alert>}
+        {currentUser && (
+          <div className="text-center">{JSON.stringify(currentUser)}</div>
+        )}
       </Fragment>
     );
   }
