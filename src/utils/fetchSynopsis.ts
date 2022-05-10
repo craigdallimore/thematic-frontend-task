@@ -1,6 +1,8 @@
 import { SynopsisResponse } from "../types";
 
-export default async function fetchSynopsis(token: string): Promise<SynopsisResponse> {
+export default async function fetchSynopsis(
+  token: string
+): Promise<SynopsisResponse> {
   const url = "/synopsis";
   const config = {
     headers: {

@@ -1,5 +1,5 @@
 import processSynopsis from "../processSynopsis";
-import {Synopsis} from "../../types";
+import { Synopsis } from "../../types";
 
 describe("processSynopsis", () => {
   it('removes unexpected "sampleHeaders" from "sampleText" arrays', () => {
