@@ -41,6 +41,7 @@
     "typescript": "^3.9.10"
   },
   "devDependencies": {
+    "@testing-library/react": "^12.1.5",
     "@types/jest": "^26.0.24",
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
@@ -65,7 +66,8 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": "ts-jest"
+      "^.+\\.tsx?$": "ts-jest",
+      "\\.svg$": "./src/test-utils/svgTransform.js"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
