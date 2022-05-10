@@ -165,9 +165,12 @@ describe("FILTERS_CLEARED", () => {
 describe("SYNOPSIS_RECEIVED", () => {
   it(`- assigns a synopsis to the synopsis field
 - ensures the synopsis data quirks are addressed
+- sets "isFetchingSynopsis" to false
 `, () => {
     const initialState = getInitialState();
     const synopsis = getSynopsis();
+
+    expect(initialState.isFetchingSynopsis).toBe(true);
 
     const action: FilterAction = {
       type: "SYNOPSIS_RECEIVED",
@@ -178,6 +181,7 @@ describe("SYNOPSIS_RECEIVED", () => {
 
     expect(state.synopsis).not.toBe(null);
     expect(state.synopsis?.columns[0].sample).not.toContain("sample-header");
+    expect(state.isFetchingSynopsis).toBe(false);
   });
   it("clears any received error information", () => {
     const initialState = getInitialState({
@@ -205,8 +209,12 @@ describe("SYNOPSIS_RECEIVED", () => {
 });
 
 describe("SYNOPSIS_ERROR_RECEIVED", () => {
-  it("stores the error object", () => {
+  it(`- stores the error object
+- sets "isFetchingSynopsis" to false
+`, () => {
     const initialState = getInitialState();
+
+    expect(initialState.isFetchingSynopsis).toBe(true);
 
     const action: FilterAction = {
       type: "SYNOPSIS_ERROR_RECEIVED",
@@ -219,5 +227,6 @@ describe("SYNOPSIS_ERROR_RECEIVED", () => {
     const state = filterReducer(initialState, action);
 
     expect(state.error).toBe(action.payload);
+    expect(state.isFetchingSynopsis).toBe(false);
   });
 });

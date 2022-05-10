@@ -51,12 +51,14 @@ export default function filterReducer(
       return {
         ...state,
         error: null,
+        isFetchingSynopsis: false,
         synopsis: processSynopsis(action.payload),
       };
     }
     case "SYNOPSIS_ERROR_RECEIVED": {
       return {
         ...state,
+        isFetchingSynopsis: false,
         error: action.payload,
       };
     }
