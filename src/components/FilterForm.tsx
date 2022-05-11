@@ -115,6 +115,9 @@ const FilterForm = (props: Props) => {
           color="primary"
           type="button"
           disabled={!canSubmit}
+          onClick={() => {
+            alert(JSON.stringify(state.filters, null, 2));
+          }}
         >
           Save
         </Button>
