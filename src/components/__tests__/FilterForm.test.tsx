@@ -196,7 +196,7 @@ describe("Adding a filter", () => {
     const filterList = container.querySelector(
       '[data-id="filter-list"]'
     ) as HTMLUListElement;
-    const clearButton = getByText("Clear") as HTMLButtonElement;
+    const cancelButton = getByText("Cancel") as HTMLButtonElement;
 
     fireEvent.click(addButton);
 
@@ -208,7 +208,7 @@ describe("Adding a filter", () => {
 
     expect(filterList.childNodes.length).toBe(1);
 
-    fireEvent.click(clearButton);
+    fireEvent.click(cancelButton);
 
     expect(filterList.childNodes.length).toBe(0);
   });

@@ -99,3 +99,18 @@
 .column-list button {
   border: 0;
 }
+
+.score-modal footer {
+  margin-top: 1rem;
+  text-align: right;
+  padding: 1rem;
+  min-height: auto; /* override bootstrap */
+}
+
+.score-modal button:last-of-type {
+  margin-left: 1rem;
+}
+
+.score-modal select {
+  max-width: 12rem;
+}

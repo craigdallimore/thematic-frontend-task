@@ -71,10 +71,15 @@ const FilterItem = (props: Props) => {
         >
           <FontAwesomeIcon icon="trash-alt" />
         </Button>
-        <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
+        <Modal
+          isOpen={showModal}
+          toggle={() => setShowModal(false)}
+          className="score-modal"
+        >
           <ModalHeader>Edit Filter</ModalHeader>
           <ModalBody data-id="modal-body">
-            <select
+            <Input
+              type="select"
               value={scoreType}
               onChange={(e) => {
                 setScoreType(e.target.value as ScoreType);
@@ -83,25 +88,28 @@ const FilterItem = (props: Props) => {
               <option value="Average">Average</option>
               <option value="NPS">NPS</option>
               <option value="Threshold">Threshold</option>
-            </select>
-            <button
-              data-id="btn-cancel-modal"
-              onClick={() => setShowModal(false)}
-            >
-              Cancel
-            </button>
-            <button
-              data-id="btn-save-modal"
-              onClick={() => {
-                setShowModal(false);
-                props.onFilterChanged({
-                  ...props.filter,
-                  scoreType,
-                });
-              }}
-            >
-              Save
-            </button>
+            </Input>
+            <footer>
+              <Button
+                data-id="btn-cancel-modal"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                color="primary"
+                data-id="btn-save-modal"
+                onClick={() => {
+                  setShowModal(false);
+                  props.onFilterChanged({
+                    ...props.filter,
+                    scoreType,
+                  });
+                }}
+              >
+                Save
+              </Button>
+            </footer>
           </ModalBody>
         </Modal>
       </li>

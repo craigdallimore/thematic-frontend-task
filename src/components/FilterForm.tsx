@@ -102,12 +102,12 @@ const FilterForm = (props: Props) => {
       </InputGroup>
       <footer>
         <Button
-          className="btn-clear"
+          className="btn-cancel"
           type="button"
           color="secondary"
           onClick={() => dispatch({ type: "FILTERS_CLEARED" })}
         >
-          Clear
+          Cancel
         </Button>
 
         <Button
