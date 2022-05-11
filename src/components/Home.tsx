@@ -59,14 +59,11 @@ class Home extends Component<HomeProps, HomeState> {
     const { currentUser, error, loading } = this.state;
     return (
       <Fragment>
-        <Hero />
+        {currentUser ? <FilterForm /> : <Hero />}
         {loading && <p className="text-center">Loading...</p>}
         {error && <Alert color="danger">{error}</Alert>}
         {currentUser && (
-          <Fragment>
-            <FilterForm />
-            <div className="text-center">{JSON.stringify(currentUser)}</div>
-          </Fragment>
+          <div className="text-center">{JSON.stringify(currentUser)}</div>
         )}
       </Fragment>
     );
