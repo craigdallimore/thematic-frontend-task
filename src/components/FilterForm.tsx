@@ -1,10 +1,17 @@
 import React from "react";
 import Loading from "./Loading";
-import { FilterState, SynopsisResponse, SynopsisError } from "../types";
+import {
+  FilterState,
+  SynopsisResponse,
+  SynopsisError,
+  Filter,
+  FilterId,
+} from "../types";
 import filterReducer from "../utils/filterReducer";
 import fetchSynopsis from "../utils/fetchSynopsis";
 import { withAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
 import AddFilter from "./AddFilter";
+import FilterItem from "./FilterItem";
 
 interface Props {
   auth0: Auth0ContextInterface;
@@ -53,8 +60,27 @@ const FilterForm = (props: Props) => {
 
   return (
     <form>
-      <h2>Ok</h2>
-      <ul data-id="filter-list"></ul>
+      <legend>Filters</legend>
+      <ul data-id="filter-list">
+        {state.filters.map((filter: Filter) => (
+          <FilterItem
+            key={filter.id}
+            filter={filter}
+            onFilterChanged={(updatedFilter: Filter) => {
+              dispatch({
+                type: "FILTER_UPDATED",
+                payload: updatedFilter,
+              });
+            }}
+            onDelete={(id: FilterId) => {
+              dispatch({
+                type: "FILTER_DELETED",
+                payload: id,
+              });
+            }}
+          />
+        ))}
+      </ul>
       <AddFilter
         columns={state.synopsis?.columns ?? []}
         onChange={(sampleHeader: string) => {

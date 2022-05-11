@@ -43,12 +43,14 @@ const FilterItem = (props: Props) => {
         </select>
         {props.filter.type === "Score" && (
           <button
+            type="button"
             data-id="btn-score-modal"
             aria-label="Configure score"
             onClick={() => setShowModal(true)}
           ></button>
         )}
         <button
+          type="button"
           data-id="btn-delete"
           aria-label="Delete filter"
           onClick={() => props.onDelete(props.filter.id)}
