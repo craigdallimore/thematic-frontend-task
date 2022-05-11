@@ -57,6 +57,13 @@ const FilterForm = (props: Props) => {
     );
   }
 
+  // Filters must have been added
+  // All filters must have a name
+  // TODO: All filters have unique names
+  const canSubmit =
+    state.filters.length > 0 &&
+    state.filters.every((filter) => filter.name.trim().length > 0);
+
   return (
     <form>
       <legend>Filters</legend>
@@ -89,7 +96,15 @@ const FilterForm = (props: Props) => {
           });
         }}
       />
-      <button disabled>Save</button>
+      <button
+        type="button"
+        onClick={() => dispatch({ type: "FILTERS_CLEARED" })}
+      >
+        Clear
+      </button>
+      <button type="button" disabled={!canSubmit}>
+        Save
+      </button>
     </form>
   );
 };

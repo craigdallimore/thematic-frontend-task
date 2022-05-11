@@ -1,7 +1,7 @@
 import React from "react";
 import fetchMock from "jest-fetch-mock";
 import { nanoid } from "nanoid";
-import { render, waitFor, screen } from "@testing-library/react";
+import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import FilterForm from "../FilterForm";
 import fetchSynopsis from "../../utils/fetchSynopsis";
 import { Synopsis } from "../../types";
@@ -148,11 +148,74 @@ describe("Given a synopsis was received", () => {
 
     expect(list).not.toBe(null);
   });
-  // TODO
-  // describe given the cancel button is clicked
-  //   it clears the state
-  // describe given the save button is clicked
-  //   given a filter has no label, it shows a warning
-  //   given a filter has no label, it does not end the flow
-  //   given all filters are valid, it ends the flow
 });
+
+describe("Adding a filter", () => {
+  test(`given a filter is added
+- it will be reflected in the list
+- the save button will be enabled
+`, async () => {
+    const props = getProps();
+    const { container, getByText } = render(<FilterForm {...props} />);
+    await waitFor(() => expect(mockedFetchSynopsis).toBeCalled());
+
+    const addButton = container.querySelector(
+      '[data-id="btn-add"]'
+    ) as HTMLButtonElement;
+    const filterList = container.querySelector(
+      '[data-id="filter-list"]'
+    ) as HTMLUListElement;
+    const saveButton = getByText("Save") as HTMLButtonElement;
+
+    expect(filterList.childNodes.length).toBe(0);
+    expect(saveButton.disabled).toBe(true);
+
+    fireEvent.click(addButton);
+
+    const columnButton = container.querySelector(
+      '[data-id="column-list"] button:first-of-type'
+    ) as HTMLButtonElement;
+
+    fireEvent.click(columnButton);
+
+    expect(filterList.childNodes.length).toBe(1);
+    expect(saveButton.disabled).toBe(false);
+  });
+
+  test("clearing the form will empty the list", async () => {
+    const props = getProps();
+    const { container, getByText } = render(<FilterForm {...props} />);
+    await waitFor(() => expect(mockedFetchSynopsis).toBeCalled());
+
+    const addButton = container.querySelector(
+      '[data-id="btn-add"]'
+    ) as HTMLButtonElement;
+    const filterList = container.querySelector(
+      '[data-id="filter-list"]'
+    ) as HTMLUListElement;
+    const clearButton = getByText("Clear") as HTMLButtonElement;
+
+    fireEvent.click(addButton);
+
+    const columnButton = container.querySelector(
+      '[data-id="column-list"] button:first-of-type'
+    ) as HTMLButtonElement;
+
+    fireEvent.click(columnButton);
+
+    expect(filterList.childNodes.length).toBe(1);
+
+    fireEvent.click(clearButton);
+
+    expect(filterList.childNodes.length).toBe(0);
+  });
+
+  // TODO given duplicate filter names, a warning is shown
+  // TODO given empty filter names, a warning is shown
+
+  test("clicking the save button will reveal the filter state", () => {});
+
+  // TODO TBC clicking the save button will clear the list?
+});
+
+// TODO clicking the delete button will remove the filter from the list
