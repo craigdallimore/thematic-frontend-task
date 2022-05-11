@@ -3,7 +3,8 @@ import { SynopsisResponse } from "../types";
 export default async function fetchSynopsis(
   token: string
 ): Promise<SynopsisResponse> {
-  const url = "/synopsis";
+  const url =
+    "https://q7hu82zjef.execute-api.us-east-1.amazonaws.com/staging/synopsis";
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

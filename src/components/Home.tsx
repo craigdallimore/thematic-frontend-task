@@ -4,6 +4,7 @@ import authConfig from "../auth_config.json";
 import { Auth0ContextInterface, withAuth0 } from "@auth0/auth0-react";
 import { Alert } from "reactstrap";
 import { User } from "../types";
+import FilterForm from "./FilterForm";
 
 interface HomeProps {
   auth0: Auth0ContextInterface;
@@ -62,7 +63,10 @@ class Home extends Component<HomeProps, HomeState> {
         {loading && <p className="text-center">Loading...</p>}
         {error && <Alert color="danger">{error}</Alert>}
         {currentUser && (
-          <div className="text-center">{JSON.stringify(currentUser)}</div>
+          <Fragment>
+            <FilterForm />
+            <div className="text-center">{JSON.stringify(currentUser)}</div>
+          </Fragment>
         )}
       </Fragment>
     );
