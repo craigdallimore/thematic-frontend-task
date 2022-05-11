@@ -25,7 +25,7 @@ export type SynopsisError = {
 export type SynopsisResponse =
   | {
       data: Synopsis;
-      status: "success";
+      status: string;
     }
   | SynopsisError;
 
