@@ -5,6 +5,9 @@ import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import FilterForm from "../FilterForm";
 import fetchSynopsis from "../../utils/fetchSynopsis";
 import { Synopsis } from "../../types";
+import initFontAwesome from "../../utils/initFontAwesome";
+
+initFontAwesome();
 
 fetchMock.enableMocks();
 

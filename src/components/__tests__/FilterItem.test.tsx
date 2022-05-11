@@ -3,6 +3,9 @@ import { nanoid } from "nanoid";
 import { render, fireEvent } from "@testing-library/react";
 import FilterItem from "../FilterItem";
 import { Filter } from "../../types";
+import initFontAwesome from "../../utils/initFontAwesome";
+
+initFontAwesome();
 
 const getFilter = (changes = {}): Filter => {
   return {

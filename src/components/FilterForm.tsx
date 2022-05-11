@@ -11,6 +11,7 @@ import fetchSynopsis from "../utils/fetchSynopsis";
 import { withAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
 import AddFilter from "./AddFilter";
 import FilterItem from "./FilterItem";
+import { Button, InputGroup, InputGroupText } from "reactstrap";
 
 interface Props {
   auth0: Auth0ContextInterface;
@@ -65,9 +66,9 @@ const FilterForm = (props: Props) => {
     state.filters.every((filter) => filter.name.trim().length > 0);
 
   return (
-    <form>
+    <form className="card filter-form">
       <legend>Filters</legend>
-      <ul data-id="filter-list">
+      <ul data-id="filter-list" className="filter-list">
         {state.filters.map((filter: Filter) => (
           <FilterItem
             key={filter.id}
@@ -87,24 +88,37 @@ const FilterForm = (props: Props) => {
           />
         ))}
       </ul>
-      <AddFilter
-        columns={state.synopsis?.columns ?? []}
-        onChange={(sampleHeader: string) => {
-          dispatch({
-            type: "FILTER_ADDED",
-            payload: sampleHeader,
-          });
-        }}
-      />
-      <button
-        type="button"
-        onClick={() => dispatch({ type: "FILTERS_CLEARED" })}
-      >
-        Clear
-      </button>
-      <button type="button" disabled={!canSubmit}>
-        Save
-      </button>
+      <InputGroup>
+        <InputGroupText>+</InputGroupText>
+        <AddFilter
+          columns={state.synopsis?.columns ?? []}
+          onChange={(sampleHeader: string) => {
+            dispatch({
+              type: "FILTER_ADDED",
+              payload: sampleHeader,
+            });
+          }}
+        />
+      </InputGroup>
+      <footer>
+        <Button
+          className="btn-clear"
+          type="button"
+          color="secondary"
+          onClick={() => dispatch({ type: "FILTERS_CLEARED" })}
+        >
+          Clear
+        </Button>
+
+        <Button
+          className="btn-save"
+          color="primary"
+          type="button"
+          disabled={!canSubmit}
+        >
+          Save
+        </Button>
+      </footer>
     </form>
   );
 };

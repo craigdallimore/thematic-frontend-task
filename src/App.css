@@ -33,3 +33,69 @@
 .result-block-container .result-block {
   opacity: 1;
 }
+
+.filter-form {
+  padding: 1rem;
+}
+
+.filter-form footer {
+  margin-top: 1rem;
+  text-align: right;
+  padding: 1rem;
+  min-height: auto; /* override bootstrap */
+}
+
+.btn-save {
+  margin-left: 1rem;
+}
+
+.filter-list {
+  list-style: none;
+  padding: 0;
+}
+.filter-list li {
+  display: flex;
+  align-items: center;
+  max-width: 36rem;
+  border: 1px solid #eee;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.filter-list li * + * {
+  margin-left: 0.5rem;
+}
+
+.filter-list li + li {
+  margin-top: 0.5rem;
+}
+
+.filter-list label {
+  margin-bottom: 0;
+}
+.filter-list [type="text"] {
+  max-width: 12rem;
+}
+.filter-list select {
+  max-width: 12rem;
+}
+.filter-list button:last-child {
+  margin-left: auto;
+}
+
+.column-list {
+  position: absolute;
+  top: 3rem;
+  max-height: 25rem;
+  overflow: scroll;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+}
+
+.column-list li {
+  padding: 0;
+}
+.column-list button {
+  border: 0;
+}

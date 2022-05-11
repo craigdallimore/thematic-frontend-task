@@ -1,6 +1,14 @@
 import React from "react";
 import { Filter, FilterType, FilterId, ScoreType } from "../types";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  Label,
+} from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   filter: Filter;
@@ -17,7 +25,7 @@ const FilterItem = (props: Props) => {
   return (
     <>
       <li>
-        <input
+        <Input
           type="text"
           value={props.filter.name}
           onChange={(e) => {
@@ -27,7 +35,9 @@ const FilterItem = (props: Props) => {
             });
           }}
         />
-        <select
+        <Label>Type</Label>
+        <Input
+          type="select"
           value={props.filter.type}
           onChange={(e) => {
             props.onFilterChanged({
@@ -40,21 +50,27 @@ const FilterItem = (props: Props) => {
           <option value="Data">Data</option>
           <option value="Search">Search</option>
           <option value="Score">Score</option>
-        </select>
+        </Input>
         {props.filter.type === "Score" && (
-          <button
+          <Button
+            light="true"
             type="button"
             data-id="btn-score-modal"
             aria-label="Configure score"
             onClick={() => setShowModal(true)}
-          ></button>
+          >
+            <FontAwesomeIcon icon="cog" />
+          </Button>
         )}
-        <button
+        <Button
+          color="danger"
           type="button"
           data-id="btn-delete"
           aria-label="Delete filter"
           onClick={() => props.onDelete(props.filter.id)}
-        ></button>
+        >
+          <FontAwesomeIcon icon="trash-alt" />
+        </Button>
         <Modal isOpen={showModal} toggle={() => setShowModal(false)}>
           <ModalHeader>Edit Filter</ModalHeader>
           <ModalBody data-id="modal-body">
