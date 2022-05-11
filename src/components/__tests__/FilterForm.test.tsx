@@ -79,7 +79,7 @@ describe("Initial state", () => {
   it("presents a loading state", async () => {
     const props = getProps();
     render(<FilterForm {...props} />);
-    const spinner = await screen.findByAltText("Loading");
+    const spinner = await screen.findByText("Loading...");
     expect(spinner).toBeDefined();
   });
   it("fetches synopsis data (once)", async () => {
@@ -99,10 +99,10 @@ describe("Given an error occurred fetching the synopsis", () => {
 
   it("conceals the loading state", async () => {
     const props = getProps();
-    const { queryByAltText } = render(<FilterForm {...props} />);
+    const { queryByText } = render(<FilterForm {...props} />);
     await waitFor(() => expect(mockedFetchSynopsis).toBeCalled());
 
-    expect(queryByAltText("Loading")).toBe(null);
+    expect(queryByText("Loading...")).toBe(null);
   });
   it("shows an error state", async () => {
     const props = getProps();
@@ -124,10 +124,10 @@ describe("Given a synopsis was received", () => {
 
   it("conceals the loading state", async () => {
     const props = getProps();
-    const { queryByAltText } = render(<FilterForm {...props} />);
+    const { queryByText } = render(<FilterForm {...props} />);
     await waitFor(() => expect(mockedFetchSynopsis).toBeCalled());
 
-    expect(queryByAltText("Loading")).toBe(null);
+    expect(queryByText("Loading...")).toBe(null);
   });
   it("shows a save button, initially disabled", async () => {
     const props = getProps();

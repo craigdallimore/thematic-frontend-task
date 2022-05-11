@@ -1,5 +1,4 @@
 import React from "react";
-import Loading from "./Loading";
 import {
   FilterState,
   SynopsisResponse,
@@ -47,7 +46,7 @@ const FilterForm = (props: Props) => {
   }, [props.auth0]);
 
   if (state.isFetchingSynopsis) {
-    return <Loading />;
+    return <p className="text-center">Loading...</p>;
   }
   if (state.error) {
     return (
