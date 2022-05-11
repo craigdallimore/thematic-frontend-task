@@ -4,6 +4,7 @@ import { FilterState, SynopsisResponse, SynopsisError } from "../types";
 import filterReducer from "../utils/filterReducer";
 import fetchSynopsis from "../utils/fetchSynopsis";
 import { withAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
+import AddFilter from "./AddFilter";
 
 interface Props {
   auth0: Auth0ContextInterface;
@@ -54,6 +55,15 @@ const FilterForm = (props: Props) => {
     <form>
       <h2>Ok</h2>
       <ul data-id="filter-list"></ul>
+      <AddFilter
+        columns={state.synopsis?.columns ?? []}
+        onChange={(sampleHeader: string) => {
+          dispatch({
+            type: "FILTER_ADDED",
+            payload: sampleHeader,
+          });
+        }}
+      />
       <button disabled>Save</button>
     </form>
   );

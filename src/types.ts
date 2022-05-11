@@ -5,14 +5,16 @@ export interface User {
 
 export type ColType = "Text" | "Date" | "Number";
 
+export type Column = {
+  colType: ColType;
+  numRows: number;
+  numUniqueValues: number;
+  sample: string[];
+  sampleHeader: string;
+};
+
 export type Synopsis = {
-  columns: Array<{
-    colType: ColType;
-    numRows: number;
-    numUniqueValues: number;
-    sample: string[];
-    sampleHeader: string;
-  }>;
+  columns: Array<Column>;
   numColumns: number;
   numRows: number;
 };

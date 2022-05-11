@@ -12,6 +12,7 @@ const AddFilter = (props: Props) => {
   return (
     <>
       <button
+        type="button"
         data-id="btn-add"
         onClick={() => setShowList(!showList)}
         disabled={props.columns.length === 0}
@@ -23,6 +24,7 @@ const AddFilter = (props: Props) => {
           {props.columns.map((col, index) => (
             <li key={`${col.sampleHeader}-${index}`}>
               <button
+                type="button"
                 onClick={() => {
                   setShowList(false);
                   props.onChange(col.sampleHeader);
